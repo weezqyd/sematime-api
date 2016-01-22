@@ -1,0 +1,24 @@
+{
+    "name": "weezqydy/sematimeapi",
+    "description": "Sematime API Gateway",
+    "type": "extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "weezqyd",
+            "email": "wizqydy@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": 
+    {
+        "php": ">=5.5.9",
+        "vlucas/phpdotenv": "^2.1",
+        "guzzlehttp/guzzle":"*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sematime\\":"src/"
+        }
+    }
+}
