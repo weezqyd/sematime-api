@@ -5,7 +5,7 @@ require __DIR__.'/../vendor/autoload.php';
         use Sematime\Api\SematimeAPI;
         use Sematime\Api\SematimeAPIException;
         // An Array of recipients
-        $recipients[] = '0729422001';
+        $recipients[] = '123456789';
         // Initialize The Sematime Api
         $gateway = new SematimeAPI();
         $message='nice one';
