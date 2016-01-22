@@ -8,8 +8,8 @@ use Sematime\Api\Exception\SematimeAPIException;
 class Sematime
 {
 	
-	public $_apiKey = 'fe07378b95dd4cee8ab78f88d1fa2a34';
-    public $_userid = '1441807142147';
+	public $_apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    public $_userid = '000000000000000000000';
     public $_requestBody;
     public $_requestUrl;
     public $_responseBody;
