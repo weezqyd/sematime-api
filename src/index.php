@@ -4,8 +4,10 @@ namespace Sematime;
 require __DIR__.'/../vendor/autoload.php';
         use Sematime\Api\SematimeAPI;
         use Sematime\Api\SematimeAPIException;
+        
+        
         // An Array of recipients
-        $recipients[] = '123456789';
+        $recipients[] = '0729422001';
         // Initialize The Sematime Api
         $gateway = new SematimeAPI();
         $message='nice one';
@@ -27,5 +29,9 @@ require __DIR__.'/../vendor/autoload.php';
                 }
             
         }
-        //var_dump($gateway);
-        ?>
+        /*
+        $dotenv = new Dotenv(__DIR__);
+        $dotenv->load();
+        echo getenv('API_KEY');
+        var_dump($dotenv);
+        ?>*/
