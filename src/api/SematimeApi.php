@@ -51,7 +51,7 @@ class SematimeAPI extends Curl implements Contract
         $con=$this->curlInitialize();
         $response = json_decode($this->_responseBody);
         //var_dump($con);
-        if($con)
+        if(is_object($response))
         {
                if($response->statusCode == $this->CREATED)
                 {
@@ -60,7 +60,7 @@ class SematimeAPI extends Curl implements Contract
 
                 }
                 //var_dump($this);
-                throw new SematimeAPIException($response->description);
+                print $response->description;
                 exit;
         }
         else

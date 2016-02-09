@@ -7,28 +7,13 @@ require __DIR__.'/vendor/autoload.php';
         
         
         // An Array of recipients
-        $recipients[] = '0729422001';
+        $recipients[] = '1234567890';
         // Initialize The Sematime Api
         $gateway = new SematimeAPI();
-        $message='nice one';
-        try
-        {
+        $message='nice one a message send through the awesome sematime api';
             $results = $gateway->sendMessage($recipients, $message);
             echo $results;
             //echo "string";
-        }
-        catch (SematimeAPIException $e)
-        {
-            $response = json_decode($e->getMessage());
-                if($response->statusCode ==$gateway->UNAUTHORIZED){
-                    echo $response->description;
-                }
-                else
-                {
-                    echo $response->description;
-                }
-            
-        }
         /*
         $dotenv = new Dotenv(__DIR__);
         $dotenv->load();

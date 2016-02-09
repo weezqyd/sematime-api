@@ -28,7 +28,7 @@ class Sematime
     public $SERVER_ERROR =500;
 
 
-    const Debug = true;
+    const Debug = false;
     function __construct()
     {
     	
