@@ -1,3 +1,5 @@
 # sematime-api
 Sematime Api gateway for php
-''' welcome
+ ```
+ composer require weezqydy/sematimeapi dev-master
+ ```
