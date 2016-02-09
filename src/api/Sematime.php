@@ -2,14 +2,15 @@
 namespace Sematime\Api;
 
 use Sematime\Api\Exception\SematimeAPIException;
+use Dotenv\Dotenv;
 /**
 * 
 */
 class Sematime
 {
 	
-	public $_apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-    public $_userid = '000000000000000000000';
+	public $_apiKey ;
+    public $_userid ;
     public $_requestBody;
     public $_requestUrl;
     public $_responseBody;
@@ -35,6 +36,10 @@ class Sematime
     }
     function boot()
     {
+        $dotenv = new Dotenv(realpath(__DIR__.'/../../'));
+        $dotenv->load();
+        $this->_apiKey=getenv('API_KEY');
+        $this->_userid=getenv('USER_ID');
     	if(strlen($this->_apiKey) == 0 || strlen($this->_userid)==0)
     	{
     		print SematimeAPIException::noCredentials();

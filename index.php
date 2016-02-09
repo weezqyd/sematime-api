@@ -1,7 +1,7 @@
 <?php
 namespace Sematime;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
         use Sematime\Api\SematimeAPI;
         use Sematime\Api\SematimeAPIException;
         
