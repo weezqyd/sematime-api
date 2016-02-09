@@ -2,18 +2,19 @@
 namespace Sematime;
 
 require __DIR__.'/vendor/autoload.php';
-        use Sematime\Api\SematimeAPI;
+        use Sematime\Api\HttpClient;
         use Sematime\Api\SematimeAPIException;
         
         
         // An Array of recipients
         $recipients[] = '1234567890';
         // Initialize The Sematime Api
-        $gateway = new SematimeAPI();
+        $gateway = new HttpClient();
         $message='nice one a message send through the awesome sematime api';
             $results = $gateway->sendMessage($recipients, $message);
-            echo $results;
-            //echo "string";
+            isset($results) ? $response = $results : $response = 'An Error Was Encoutered';
+            
+            echo $response ;
         /*
         $dotenv = new Dotenv(__DIR__);
         $dotenv->load();
