@@ -3,7 +3,6 @@ namespace Sematime;
 
 require __DIR__.'/vendor/autoload.php';
         use Sematime\Api\HttpClient;
-        use Sematime\Api\SematimeAPIException;
         
         
         // An Array of recipients

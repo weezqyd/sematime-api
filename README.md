@@ -1,5 +1,5 @@
-# sematime-api
-Sematime Api gateway for php
+# Sematime Api gateway for php 
+This is a php package that you can easily intergarate into your project to send SMS Messages usint the awesome Sematime API, to start using this package require it in your project
  ```
  composer require weezqydy/sematimeapi dev-master
  ```
