@@ -13,22 +13,9 @@ require __DIR__.'/../vendor/autoload.php';
         // Initialize The Sematime Api
         $gateway = new SematimeAPI();
         $message='A nice message send using Sematime';
-        try
-        {
-            $results = $gateway->sendMessage($recipients, $message);
-            echo $results;
-        }
-        catch (SematimeAPIException $e)
-        {
-            $response = json_decode($e->getMessage());
-                if($response->statusCode ==$gateway->UNAUTHORIZED){
-                    echo $response->description;
-                }
-                else
-                {
-                    echo $response->description;
-                }
-            
-        }
+       
+        $results = $gateway->sendMessage($recipients, $message);
+        echo $results;
+        
  ```
  
