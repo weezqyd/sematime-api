@@ -28,7 +28,7 @@ yourself an account.
 
 ### Getting Started
 - Now at the root of yor project create a new file and name it .env 
-- In the file you just created add your API key and User Id
+- In the file you just created add your API key and User Id as follows
 ```
 API_KEY = "your-sematime-api-key"
 USER_ID = "user-id-from-sematime"
