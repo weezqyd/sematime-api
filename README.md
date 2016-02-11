@@ -38,7 +38,10 @@ yourself an account.
 API_KEY = "your-sematime-api-key"
 USER_ID = "user-id-from-sematime"
 ```
-We are now ready to send our first message using sematime
+
+### Sending Messages
+
+With everything configured properly, we are now ready to send our first message using sematime
 ```php
 // Include the composer autoloader if its not included yet
 require __DIR__.'/vendor/autoload.php';
@@ -95,6 +98,11 @@ will pass them to you when invoking your callback.
          ->message('an awesome message')
          ->send(); // send the message
 ```
+### Contacts
+Sematime organizes contacts into groups. A group will usually contain the contacts of people
+who share some relationship. For example, group ‘Sales Team’ would be a group for the
+members of the company’s sales team.
+#### Adding Contacts
  We can also add contacts to your sematime account, just prepare your contact and then save it
  ```php
     require __DIR__.'/vendor/autoload.php';
@@ -138,4 +146,8 @@ will pass them to you when invoking your callback.
         $list = $sema->addGroup($group)->addContacts($group,$contacts)->save() // sure enough all your contacts will be saved
         echo $list;
 ```
+
+#### Editing Contacts
+
+
 
