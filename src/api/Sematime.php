@@ -52,25 +52,21 @@ class Sematime extends HttpClient
             $this->_responseBody['senderId'] = $from;
             return $this;
         }
-    public function addContact($params=[])
-        {
-           
-        }
-    public function addId($id='')
+    public function addId($id='',$key = 0 )
         { 
-           $this->contacts[]['contactId'] = $id;
+           $this->contacts[$key]['contactId'] = $id;
            return $this; 
         }
-    public function addName($name='')
+    public function addName($name='',$key = 0 )
         { 
         if($name==''){print SematimeAPIException::contactRequired();exit;}
-           $this->contacts[]['name'] = $name;
+           $this->contacts[$key]['name'] = $name;
            return $this; 
         }
-    public function addPhone($phone='')
+    public function addPhone($phone='',$key = 0 )
         {
         if($phone==''){print SematimeAPIException::contactRequired();exit;}
-           $this->contacts[]['phoneNumber'] = $phone; 
+           $this->contacts[$key]['phoneNumber'] = $phone; 
            return $this;
         }
     public function save()
@@ -163,5 +159,9 @@ class Sematime extends HttpClient
         }
         else{throw new SematimeAPIException('A group name is required to edit contacts'); }
         $this->_requestUrl=$this->url.'/contacts/'.$contactId;
+    }
+    public function FunctionName($value='')
+    {
+        # code...
     }
 }

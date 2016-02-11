@@ -55,4 +55,17 @@ require __DIR__.'/vendor/autoload.php';
         echo $results;
         
  ```
+ We can also add contacts to your sematime account
+ ```php
+    require __DIR__.'/vendor/autoload.php';
+        use Sematime\Api\Sematime;      
+        // Initialize The Sematime Api
+        $sema = new Sematime();
+        $response=$sema->addGroup('members') // the group name you wish to add contacts
+                       ->addId('1') // contact id for the contact you want to add
+                       ->addName('John Doe') // a name for your contact 
+                       ->addPhone('1234567890') // phone number you wish to add
+                       ->save(); // finally save your contact
+          print  $response; // {"statusCode":200, "description":"Contacts added successfully.", "totalContacts":1, "contactsAdded":1}
+ ```
  
