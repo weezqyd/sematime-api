@@ -56,7 +56,8 @@ require __DIR__.'/vendor/autoload.php';
         
  ```
  You can optionally add other parameterss while building your message
-    - salutation – an optional parameter whose value is the salutation type to use.
+
+ - salutation – an optional parameter whose value is the salutation type to use.
 When provided, each recipient will receive a personalized message beginning
 with the salutation followed by their name. For example: Dear Admin, Dear
 Lucy, Dear Jean etc in which case the salutation is the word ‘Dear
