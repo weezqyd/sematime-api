@@ -11,7 +11,7 @@ To include this package in your project add this to your composer.json and then 
 ```
 	{
         "require": {
-            "weezqydy/sematimeapi": "*"
+            "weezqydy/sematimeapi": "dev-master"
         }
     }
 ```
@@ -48,8 +48,7 @@ require __DIR__.'/vendor/autoload.php';
         // Initialize The Sematime Api
         $gateway = new Sematime();
         //Create Your Message
-        $message='A nice message send using Sematime';
-       
+        $message='A nice message send using Sematime';      
         $results = $gateway->AddTo($recipients)->message($message)->send();
         // if evrything goes well you will get a response from Sematime
         echo $results;
@@ -91,12 +90,12 @@ will pass them to you when invoking your callback.
          ->senderId('Sematime')
          ->scheduledTime('1426683660000')
          ->callbackUrl('https://api.mydomain.com/callback')
-         ->extra([extra=>'extra data'])
-         ->addTo('1234567890')
+         ->extra('extra=extra data')
+         ->addTo(array('1234567890')) // addTo expects an array of recipients
          ->message('an awesome message')
          ->send(); // send the message
 ```
- We can also add contacts to your sematime account
+ We can also add contacts to your sematime account, just prepare your contact and then save it
  ```php
     require __DIR__.'/vendor/autoload.php';
         use Sematime\Api\Sematime;      
@@ -109,4 +108,34 @@ will pass them to you when invoking your callback.
                        ->save(); // finally save your contact
           print  $response; // {"statusCode":200, "description":"Contacts added successfully.", "totalContacts":1, "contactsAdded":1}
  ```
- 
+ if you want to create multiple contacts at once, prepare  you array and add them
+ '''php
+    $contacts = [
+        [
+            'contactId'=> '1',
+            'phoneNumber'=>'1234567890',
+            'name' => 'John Doe',
+        ],
+         [
+            'contactId'=> '2',
+            'phoneNumber'=>'020345678',
+            'name' => 'Arnold Weaver',
+        ],
+         [
+            'contactId'=> '3',
+            'phoneNumber'=>'3246789009',
+            'name' => 'Mary Cook',
+        ],
+         [
+            'contactId'=> '4',
+            'phoneNumber'=>'0345789032',
+            'name' => 'Garry DAvis',
+        ],
+
+    ];
+    $group= 'My List';
+        $sema = new Sematime();
+        $list = $sema->addGroup($group)->addContacts($group,$contacts)->save() // sure enough all your contacts will be saved
+        echo $list;
+```
+

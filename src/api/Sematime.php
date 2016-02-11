@@ -152,6 +152,22 @@ class Sematime extends HttpClient
         //return json_encode($this->_responseBody);
         return $this->get($this->_requestUrl);
     }
+    public function addContacts($contacts)
+    {
+        $id= -1;
+       foreach ($contacts as $key => $contact) {
+        $id++;
+        if($key=='name')
+            $this->addName($contact, $id);
+        } 
+        if($key=='contactId' OR $key=='Id')
+            $this->addId($contact, $id);
+        }       
+        if($key=='phoneNumber' OR $key=='phone')
+            $this->addPhone($contact, $id);
+        } 
+        return $this;
+    }
     public function editContact($contactId, $params=[])
     {
         if(array_key_exists('groupName', $params)){
