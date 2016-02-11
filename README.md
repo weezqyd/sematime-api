@@ -109,7 +109,7 @@ will pass them to you when invoking your callback.
           print  $response; // {"statusCode":200, "description":"Contacts added successfully.", "totalContacts":1, "contactsAdded":1}
  ```
  if you want to create multiple contacts at once, prepare  you array and add them
- '''php
+ ```php
     $contacts = [
         [
             'contactId'=> '1',
