@@ -2,20 +2,23 @@
 namespace Sematime\Api;
 
 use Sematime\Api\Exception\SematimeAPIException;
-use Dotenv\Dotenv;
+use Sematime\Api\HttpClient;
 /**
 * 
 */
-class Sematime
+class Sematime extends HttpClient
 {
 	
 	public $_apiKey ;
     public $_userid ;
     public $_requestBody;
     public $_requestUrl;
-    public $_responseBody;
+    public $_responseBody = array();
     public $_responseInfo;
-
+    public $_to = array();
+    public $_from;
+    public $contact = array();
+    public $contacts = array();
     public $SMS_URL = "https://api.sematime.com/v1/{userId}/messages";
     public $URL = "https://api.sematime.com/v1/{userId}";
 
@@ -31,22 +34,134 @@ class Sematime
     const Debug = false;
     function __construct()
     {
-    	
-    	$this->boot();
+    	parent::__construct();
+        $this->url=str_replace('{userId}', $this->_userid, $this->URL);
     }
-    function boot()
+   
+    public function addTo($to = array())
+        {
+           foreach ($to as $key => $reccipient)
+            {
+                 $this->_to[$key]= $reccipient;   
+            }
+        $this->_responseBody = implode(',',$this->_to);
+        return $this;
+        }
+    public function addFrom($from ='')
+        {
+            $this->_responseBody['senderId'] = $from;
+            return $this;
+        }
+    public function addContact($params=[])
+        {
+           
+        }
+    public function addId($id='')
+        { 
+           $this->contacts[]['contactId'] = $id;
+           return $this; 
+        }
+    public function addName($name='')
+        { 
+        if($name==''){print SematimeAPIException::contactRequired();exit;}
+           $this->contacts[]['name'] = $name;
+           return $this; 
+        }
+    public function addPhone($phone='')
+        {
+        if($phone==''){print SematimeAPIException::contactRequired();exit;}
+           $this->contacts[]['phoneNumber'] = $phone; 
+           return $this;
+        }
+    public function save()
+        {
+            $this->contact['contacts']=$this->contacts;
+            $this->_requestUrl=$this->url.'/contacts';
+            //return $this;
+            return $this->exec($this->_requestUrl,$this->contact);
+        }
+    public function addGroup($group='')
+        {
+        if($group==''){print 'a group name is reuired'; exit;}
+           $this->contact['groupName'] = $group;
+           return $this; 
+        }
+        /**
+        *@param $masage
+        */
+        //message – the message to send.
+    public function sendMessage($message)
+        {
+            if(empty($message)){print SematimeAPIException::toOrMessage(); exit; }
+            $this->_responseBody['message'] = $message;
+            $this->_requestUrl = str_replace('{userId}', $this->_userid, $this->SMS_URL);
+            return $this;
+        }
+    public function scheduleTime($time = '')
+        {
+            $time==='' ? $time=time() : $time;
+            $this->_responseBody['scheduledTime'] = $time;
+            return $this;
+        }
+    public function callbackUrl($url)
+        {
+            if(filter_var($url, FILTER_VALIDATE_URL)==false){ print SematimeAPIException::invalidUrl(); exit;}
+            $this->_responseBody['callbackUrl'] = $url;
+            return $this;
+        }
+    public function signature($signature)
+        {
+           $this->_responseBody['signature'] = $signature;
+           return $this;
+        }
+    public function salutation($salutation)
+        {
+            $this->_responseBody['salutation']= $salutation;
+            return $this;
+        }
+    public function extra($extra)
+        {
+           $this->_responseBody['extraParameters']=$extra;
+           return $this;
+        }
+    public function getScheduled($messageId)
+        {
+            $this->_requestUrl=$this->url.'/messages/scheduled/'.$messageId;
+            return $this->get();
+        }
+    public function getAllScheduled($limit= -1, $offset=  0)
     {
-        $dotenv = new Dotenv(realpath(__DIR__.'/../../'));
-        $dotenv->load();
-        $this->_apiKey=getenv('API_KEY');
-        $this->_userid=getenv('USER_ID');
-    	if(strlen($this->_apiKey) == 0 || strlen($this->_userid)==0)
-    	{
-    		print SematimeAPIException::noCredentials();
-            exit;
-    		//var_dump($this);
-    		
-    	}
+        $this->_responseBody['rowCount']=$limit;
+        $this->_responseBody['lastOffset'] = $offset;
+        $this->_requestUrl=$this->url.'/messages/scheduled';
+        return $this->get($this->_requestUrl);
     }
-
+    public function deleteScheduled($messageId)
+    {
+        $this->_requestUrl=$this->url.'/messages/scheduled/'.$messageId.'/delete';
+        $this->post($this->_requestUrl);
+    }
+    public function send()
+    {
+        return $this->exec($this->_requestUrl,$this->_responseBody);
+    }
+    public function getContact($contactId='')
+    {
+        $this->_requestUrl = $this->url.'/contacts/'.$contactId;
+        return $this->get($this->_requestUrl);
+    }
+    public function editContact($contactId, $params=[])
+    {
+        if(array_key_exists('groupName', $params)){
+        foreach ($params as $key => $contact) 
+        {
+            if($key==='newName' OR $key==='newPhoneNumber' OR $key==='groupName'){
+            $this->contacts[$key]=$contact;
+            }
+            else{throw new SematimeAPIException('Please provide all the details for editing the contact'); }
+        }
+        }
+        else{throw new SematimeAPIException('A group name is required to edit contacts'); }
+        $this->_requestUrl=$this->url.'/contacts/'.$contactId;
+    }
 }

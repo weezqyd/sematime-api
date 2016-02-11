@@ -4,42 +4,64 @@ namespace Sematime\Api;
 use Httpful\Request;
 use Httpful\Mime;
 use Httpful\Http;
-use Sematime\Api\Sematime;
+use Sematime\Contracts\HttpClientInterface;
+use Dotenv\Dotenv;
 
-Class HttpClient extends Sematime // implements HttpClientInterface
+
+Class HttpClient implements HttpClientInterface
 {
 	public $init;
 
 	function __construct()
 	{
-		parent::__construct();
+		$this->boot();
 		$this->init();
-	}
+    }
+    public function boot()
+    {
+      	$base = realpath(__DIR__.'/../../');
+      	$vendor = realpath(__DIR__.'/../../../../../');
+      	if(file_exists($base.'/.env')){$dotenv = new Dotenv($base);}
+      	if(file_exists($vendor.'/.env')){$dotenv = new Dotenv($vendor);}
+      	$dotenv->load();
+      	$this->_apiKey=getenv('API_KEY');
+      	$this->_userid=getenv('USER_ID');
+        if(strlen($this->_apiKey) === 0 || strlen($this->_userid)===0)
+        {
+        	print SematimeAPIException::noCredentials();
+        }
+    }
 
 	public function init()
 	{
 		$this->init = Request::init()
 	    ->withoutStrictSsl()        // Ease up on some of the SSL checks
-		->addHeaders(['content-type'=>Mime::JSON,'apikey'=>$this->_apiKey]);
+		->addHeaders(['content-type'=>Mime::JSON,'apikey'=>$this->_apiKey]); // 
  		return Request::ini($this->init);
-	}
-	public function sendMessage($to, $message, $options='')
-	{
-		$this->_responseBody=$this->jsonEncode([
-						'message'    => $message,
-		            	'recipients' => implode(',',$to),
-					   ]);
-		$this->_requestUrl = str_replace('{userId}', $this->_userid, $this->SMS_URL);
-		$this->response=$this->init->post($this->_requestUrl )->body($this->_responseBody)->send();
-		return $this->response ;
-		//var_dump($this);
-
 	}
 	public function jsonEncode($data)
 	{
 		return json_encode($data);
 	}
-	public function addContact($contacts)
+	public function put($url, $body)
+	{
+		return $this->init->post($url)->body($body)->send();
+	}
+	public function exec($url,$body)
+	{
+		$this->body= $this->jsonEncode($body);
+		$this->response=$this->init->post($url )->body($this->body)->send();
+		return $this->response;
+	}
+	public function get($url)
+	{
+		return $this->init->get($url)->send();	
+	}
+	public function post($url)
+	{
+		return $this->init->post($url)->send();
+	}
+	public function delete($url)
 	{
 		
 	}

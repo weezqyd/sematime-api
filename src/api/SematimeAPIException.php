@@ -17,4 +17,12 @@ class SematimeAPIException extends Exception
     {
     	return "Please supply both to and message parameters";
     }
+    function contactRequired()
+    {
+        return "Please supply both phone number and and parameters";
+    }
+    function invalidUrl()
+    {
+        return "Provide a valid URL";
+    }
 }

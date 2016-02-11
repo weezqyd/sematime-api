@@ -1,5 +1,5 @@
 {
-    "name": "weezqyd/sematime",
+    "name": "weezqydy/sematimeapi",
     "description": "Sematime API Gateway",
     "type": "extension",
     "license": "MIT",
@@ -21,5 +21,13 @@
         "psr-4": {
             "Sematime\\":"src/"
         }
+    },
+    "scripts": {
+        "post-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
     }
 }
