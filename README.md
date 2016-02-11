@@ -23,7 +23,7 @@ yourself an account.
 
 #### Getting your API credentials
 
-- To interact with our API, you will need to have an API key and the user ID of your Sematime account. We use these credentials to authenticate your requests.
+- To interact with sematime API, you will need to have an API key and the user ID of your Sematime account. We use these credentials to authenticate your requests.
 - Login to your Sematime account and then click on the ‘My Account’ drop-down menu on your top right corner, choose ‘API Integration’ and then click on the ‘Generate Key’. You will be assigned a 32 character long API Key plus the accompanying user ID.
 
 ### Getting Started
