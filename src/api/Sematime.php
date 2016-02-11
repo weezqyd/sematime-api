@@ -44,7 +44,7 @@ class Sematime extends HttpClient
             {
                  $this->_to[$key]= $reccipient;   
             }
-        $this->_responseBody = implode(',',$this->_to);
+        $this->_responseBody['reccipients'] = implode(',',$this->_to);
         return $this;
         }
     public function addFrom($from ='')
@@ -86,7 +86,7 @@ class Sematime extends HttpClient
         *@param $masage
         */
         //message – the message to send.
-    public function sendMessage($message)
+    public function message($message)
         {
             if(empty($message)){print SematimeAPIException::toOrMessage(); exit; }
             $this->_responseBody['message'] = $message;
@@ -130,7 +130,7 @@ class Sematime extends HttpClient
         $this->_responseBody['rowCount']=$limit;
         $this->_responseBody['lastOffset'] = $offset;
         $this->_requestUrl=$this->url.'/messages/scheduled';
-        return $this->get($this->_requestUrl);
+        return $this->get($this->_requestUrl,$this->_responseBody);
     }
     public function deleteScheduled($messageId)
     {
@@ -141,9 +141,13 @@ class Sematime extends HttpClient
     {
         return $this->exec($this->_requestUrl,$this->_responseBody);
     }
-    public function getContact($contactId='')
+    public function getContacts($group, $limit=20, $offset=0)
     {
-        $this->_requestUrl = $this->url.'/contacts/'.$contactId;
+        $this->_responseBody['groupName'] = $group;
+        $this->_responseBody['rowCount'] = $limit;
+        $this->_responseBody['lastOffset'] = $offset;
+        $this->_requestUrl = $this->url.'/contacts?'.http_build_query($this->_responseBody, '', '&');
+        //return json_encode($this->_responseBody);
         return $this->get($this->_requestUrl);
     }
     public function editContact($contactId, $params=[])

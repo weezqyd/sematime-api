@@ -53,8 +53,9 @@ Class HttpClient implements HttpClientInterface
 		$this->response=$this->init->post($url )->body($this->body)->send();
 		return $this->response;
 	}
-	public function get($url)
+	public function get($url,$body = '')
 	{
+		//$this->body= $this->jsonEncode($body);
 		return $this->init->get($url)->send();	
 	}
 	public function post($url)

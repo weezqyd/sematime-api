@@ -11,7 +11,7 @@ Interface HttpClientInterface
 
 	public function exec($url, $body);
 
-	public function get($url);
+	public function get($url,$body= '');
 	
 	public function post($url);
 	
