@@ -40,14 +40,16 @@ class Sematime extends HttpClient
    
     public function addTo($to = array())
         {
+          if(is_array($to)){
            foreach ($to as $key => $reccipient)
             {
                  $this->_to[$key]= $reccipient;   
             }
-        $this->_responseBody['reccipients'] = implode(',',$this->_to);
+        $this->_responseBody['recipients'] = implode(',',$this->_to);
+            } else{ throw new SematimeAPIException('AddTo Expexts the recipients to be an array');}
         return $this;
         }
-    public function addFrom($from ='')
+    public function senderId($from ='')
         {
             $this->_responseBody['senderId'] = $from;
             return $this;
@@ -93,7 +95,7 @@ class Sematime extends HttpClient
             $this->_requestUrl = str_replace('{userId}', $this->_userid, $this->SMS_URL);
             return $this;
         }
-    public function scheduleTime($time = '')
+    public function scheduledTime($time = '')
         {
             $time==='' ? $time=time() : $time;
             $this->_responseBody['scheduledTime'] = $time;
@@ -163,9 +165,8 @@ class Sematime extends HttpClient
         }
         else{throw new SematimeAPIException('A group name is required to edit contacts'); }
         $this->_requestUrl=$this->url.'/contacts/'.$contactId;
+        $this->_responseBody=$this->contacts;
+        return $this->put($this->_requestUrl,$this->_responseBody);
     }
-    public function FunctionName($value='')
-    {
-        # code...
-    }
+    
 }
