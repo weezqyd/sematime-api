@@ -76,13 +76,25 @@ milliseconds when you want the message to be sent out on a future date.
 will be used to send your message. If not specified, your Sematime
 account’s sender Id will be used instead.
 
+- callbackUrl() – an optional parameter whose value is the URL that we will call in
+order to pass the delivery report after sending a scheduled message. All callbacks
+are invoked via HTTP POST.
+
 - extra() – an optional parameter containing additional parameters that
 you may need to pass on to our API for later processing by your system. For
 example, account numbers, user Ids, etc. We don’t process these parameters and
 will pass them to you when invoking your callback.
 
 ```php
-    $sema->signature('Sent by The Sematime team. Call 0706129100');// other parameters folows
+  // all these methods are chainable
+    $sema->signature('Sent by The Sematime team. Call 0706129100')
+         ->senderId('Sematime')
+         ->scheduledTime('1426683660000')
+         ->callbackUrl('https://api.mydomain.com/callback')
+         ->extra([extra=>'extra data'])
+         ->addTo('1234567890')
+         ->message('an awesome message')
+         ->send(); // send the message
 ```
  We can also add contacts to your sematime account
  ```php
