@@ -116,7 +116,7 @@ members of the company’s sales team.
                        ->save(); // finally save your contact
           print  $response; // {"statusCode":200, "description":"Contacts added successfully.", "totalContacts":1, "contactsAdded":1}
  ```
- if you want to create multiple contacts at once, prepare  you array and add them
+ if you want to create multiple contacts at once, prepare  an array and add them
  ```php
     $contacts = [
         [
@@ -143,7 +143,7 @@ members of the company’s sales team.
     ];
     $group= 'My List';
         $sema = new Sematime();
-        $list = $sema->addGroup($group)->addContacts($group,$contacts)->save() // sure enough all your contacts will be saved
+        $list = $sema->addGroup($group)->addContacts($contacts)->save() // sure enough all your contacts will be saved
         echo $list;
 ```
 

@@ -54,21 +54,21 @@ class Sematime extends HttpClient
             $this->_responseBody['senderId'] = $from;
             return $this;
         }
-    public function addId($id='',$key = 0 )
+    public function addId($cid='',$id = 0 )
         { 
-           $this->contacts[$key]['contactId'] = $id;
+           $this->contacts[$id]['contactId'] = $cid;
            return $this; 
         }
-    public function addName($name='',$key = 0 )
+    public function addName($name='',$id = 0 )
         { 
         if($name==''){print SematimeAPIException::contactRequired();exit;}
-           $this->contacts[$key]['name'] = $name;
+           $this->contacts[$id]['name'] = $name;
            return $this; 
         }
-    public function addPhone($phone='',$key = 0 )
+    public function addPhone($phone='',$id = 0 )
         {
         if($phone==''){print SematimeAPIException::contactRequired();exit;}
-           $this->contacts[$key]['phoneNumber'] = $phone; 
+           $this->contacts[$id]['phoneNumber'] = $phone; 
            return $this;
         }
     public function save()
@@ -157,15 +157,16 @@ class Sematime extends HttpClient
         $id= -1;
        foreach ($contacts as $key => $contact) {
         $id++;
-        if($key=='name')
+        if($key=='name'){
             $this->addName($contact, $id);
         } 
-        if($key=='contactId' OR $key=='Id')
+        if($key=='contactId' OR $key=='Id'){
             $this->addId($contact, $id);
         }       
-        if($key=='phoneNumber' OR $key=='phone')
+        if($key=='phoneNumber' OR $key=='phone'){
             $this->addPhone($contact, $id);
-        } 
+        }
+    }
         return $this;
     }
     public function editContact($contactId, $params=[])
