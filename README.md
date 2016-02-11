@@ -57,7 +57,7 @@ require __DIR__.'/vendor/autoload.php';
  ```
  You can optionally add other parameterss while building your message
 
- - salutation – an optional parameter whose value is the salutation type to use.
+ - salutation() – an optional parameter whose value is the salutation type to use.
 When provided, each recipient will receive a personalized message beginning
 with the salutation followed by their name. For example: Dear Admin, Dear
 Lucy, Dear Jean etc in which case the salutation is the word ‘Dear
@@ -65,9 +65,22 @@ Lucy, Dear Jean etc in which case the salutation is the word ‘Dear
      //you can chain the parameters in any order
     $sema->message('message to send')->addTo('1234567890')->salutation('Dear')->send();
 ```
-- signature - an optional parameter whose value is a unique message that is
+- signature() - an optional parameter whose value is a unique message that is
 attached at the end of all the messages that you send. For example, Sent by The
 Sematime team. Call 0706129100 .
+
+- scheduledTime() – an optional parameter whose value is the date and time in
+milliseconds when you want the message to be sent out on a future date.
+
+- senderId() – an optional parameter whose value is the sender ID / brand that
+will be used to send your message. If not specified, your Sematime
+account’s sender Id will be used instead.
+
+- extra() – an optional parameter containing additional parameters that
+you may need to pass on to our API for later processing by your system. For
+example, account numbers, user Ids, etc. We don’t process these parameters and
+will pass them to you when invoking your callback.
+
 ```php
     $sema->signature('Sent by The Sematime team. Call 0706129100');// other parameters folows
 ```
