@@ -119,11 +119,12 @@ members of the company’s sales team.
                        ->save(); // finally save your contact
           print  $response; // {"statusCode":200, "description":"Contacts added successfully.","totalContacts":1, "contactsAdded":1}
  ```
- 
 
-#### Retreiving Contacts
+
+    #### Retreiving Contacts
 
     Getting contacts from a group - Provide the group name for the contacts you want to retreive
+
 
 ```php
 
