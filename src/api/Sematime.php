@@ -150,24 +150,17 @@ class Sematime extends HttpClient
         $this->_responseBody['lastOffset'] = $offset;
         $this->_requestUrl = $this->url.'/contacts?'.http_build_query($this->_responseBody, '', '&');
         //return json_encode($this->_responseBody);
-        return $this->get($this->_requestUrl);
+        return $this;
     }
     public function addContacts($contacts)
     {
-        $id= -1;
-       foreach ($contacts as $key => $contact) {
-        $id++;
-        if($key=='name'){
-            $this->addName($contact, $id);
-        } 
-        if($key=='contactId' OR $key=='Id'){
-            $this->addId($contact, $id);
-        }       
-        if($key=='phoneNumber' OR $key=='phone'){
-            $this->addPhone($contact, $id);
-        }
-    }
+      if(array_key_exists('name', $contacts) AND array_key_exists('contactId', $contacts) AND array_key_exists('phoneNumber', $contacts)){
+      }
+      else{
+        throw new SematimeAPIException("Your contacts dont seem to be prepared correctly");
+      }
         return $this;
+
     }
     public function editContact($contactId, $params=[])
     {
