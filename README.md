@@ -117,10 +117,9 @@ members of the company’s sales team.
                        ->addName('John Doe') // a name for your contact 
                        ->addPhone('1234567890') // phone number you wish to add
                        ->save(); // finally save your contact
-          print  $response; /** {"statusCode":200, "description":"Contacts added successfully.",
-                             *    "totalContacts":1, "contactsAdded":1}
-                            */
+          print  $response; // {"statusCode":200, "description":"Contacts added successfully.","totalContacts":1, "contactsAdded":1}
  ```
+ 
 
 #### Retreiving Contacts
 
