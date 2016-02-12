@@ -112,7 +112,7 @@ members of the company’s sales team.
         use Sematime\Api\Sematime;      
         // Initialize The Sematime Api
         $sema = new Sematime();
-        $response=$sema->addGroup('members') // the group name you wish to add contacts
+        $response=$sema->groupName('My Group') // the group name you wish to add contacts
                        ->addId('1') // contact id for the contact you want to add
                        ->addName('John Doe') // a name for your contact 
                        ->addPhone('1234567890') // phone number you wish to add
@@ -123,7 +123,7 @@ members of the company’s sales team.
 
 #### Retreiving Contacts
 
-Getting contacts from a group - Provide the group name for the contacts you want to retreive
+- Getting contacts from a group - Provide the group name for the contacts you want to retreive
 
 
 ```php
@@ -135,7 +135,7 @@ Getting contacts from a group - Provide the group name for the contacts you want
     $contacts= $sema->getGroupContacts($group); // you will get a json formated string of your contacts
 
 ```
-Getting an Individual contact from a group - Pass in the contactId as the first parameter folowed by the groupName
+- Getting an Individual contact from a group - Pass in the contactId as the first parameter followed by the groupName
 
 ```php
 
@@ -145,6 +145,20 @@ Getting an Individual contact from a group - Pass in the contactId as the first 
     $group = 'My Group'; // The group you want to get contacts;
     $contactId= '14578652';
     $contacts= $sema->getContacts($contactId, $group); // you will get a json formated string of the contact
+
+```
+#### Editing Contacts
+To edit your contact all you need to do is provide your new name or new phone number for that contact
+
+````php
+    use Semamatime/Api/Sematime;
+
+    $sema= new Sematime();
+    $edit= $sema->editContact('145367')// provide the contact id to edit
+                ->groupName('My Group') // The group in which the contact exists
+                ->newName('David Clerk')// New name for contact
+                ->newPhoneNumber('1234567890') // New phone Number to the contact
+                ->edit(); // Save your changes 
 
 ```
 

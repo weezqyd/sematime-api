@@ -78,7 +78,7 @@ class Sematime extends HttpClient
             //return $this;
             return $this->exec($this->_requestUrl,$this->contact);
         }
-    public function addGroup($group='')
+    public function groupName($group='')
         {
         if($group==''){print 'a group name is reuired'; exit;}
            $this->contact['groupName'] = $group;
@@ -162,21 +162,10 @@ class Sematime extends HttpClient
         return $this;
 
     }
-    public function editContact($contactId, $params=[])
+    public function editContact($id)
     {
-        if(array_key_exists('groupName', $params)){
-        foreach ($params as $key => $contact) 
-        {
-            if($key==='newName' OR $key==='newPhoneNumber' OR $key==='groupName'){
-            $this->contacts[$key]=$contact;
-            }
-            else{throw new SematimeAPIException('Please provide all the details for editing the contact'); }
-        }
-        }
-        else{throw new SematimeAPIException('A group name is required to edit contacts'); }
-        $this->_requestUrl=$this->url.'/contacts/'.$contactId;
-        $this->_responseBody=$this->contacts;
-        return $this->put($this->_requestUrl,$this->_responseBody);
+        $this->_requestUrl=$this->url.'/contacts/'.$id.'/edit';
+        return $this;
     }
     public function getContact($id = '', $group='')
     {
@@ -188,5 +177,24 @@ class Sematime extends HttpClient
         return $this->get($this->_requestUrl);
         
     }
-    
+    public function newName($name= '')
+    {
+       if(!isset($name)){
+       throw new SematimeAPIException('Please provide a name for your contact'); 
+        }
+        $this->contact['newname'] = $name;
+        return $this;
+    }
+    public function newPhoneNumber($phone='')
+    {
+       if(empty($phone)){
+       throw new SematimeAPIException('Please provide a phone numberfor your contact'); 
+        }
+        $this->contact['newPhoneNumber'] = $phone;
+        return $this;
+    }
+    public function edit()
+    {
+        return $this->put($this->_requestUrl,$this->contact);
+    }
 }
