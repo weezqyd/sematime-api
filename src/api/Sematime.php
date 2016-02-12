@@ -164,7 +164,7 @@ class Sematime extends HttpClient
     }
     public function editContact($id)
     {
-        $this->_requestUrl=$this->url.'/contacts/'.$id.'/edit';
+        $this->_requestUrl=$this->url.'/contacts/'.$id;
         return $this;
     }
     public function getContact($id = '', $group='')
