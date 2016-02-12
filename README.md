@@ -122,16 +122,29 @@ members of the company’s sales team.
                             */
  ```
 
-#### Getting contacts from a group
+#### Retreiving Contacts
 
-Get contacts from a group
+    - Getting contacts from a group - Provide the group name for the contacts you want to retreive
+
 ```php
 
     use Semamatime/Api/Sematime;
 
     $sema= new Sematime();
     $group = 'My Group'; // The group you want to get contacts;
-    $contacts= $sema->getContacts($group)->get(); // you will get a json formated string of your contacts
+    $contacts= $sema->getGroupContacts($group); // you will get a json formated string of your contacts
+
+```
+    - Getting an Individual contact from a group - Pass in the contactId as the first parameter folowed by the groupName
+
+```php
+
+    use Semamatime/Api/Sematime;
+
+    $sema= new Sematime();
+    $group = 'My Group'; // The group you want to get contacts;
+    $contactId= '14578652';
+    $contacts= $sema->getContacts($contactId, $group); // you will get a json formated string of the contact
 
 ```
 

@@ -143,14 +143,14 @@ class Sematime extends HttpClient
     {
         return $this->exec($this->_requestUrl,$this->_responseBody);
     }
-    public function getContacts($group, $limit=20, $offset=0)
+    public function getGroupContacts($group, $limit=20, $offset=0)
     {
         $this->_responseBody['groupName'] = $group;
         $this->_responseBody['rowCount'] = $limit;
         $this->_responseBody['lastOffset'] = $offset;
         $this->_requestUrl = $this->url.'/contacts?'.http_build_query($this->_responseBody, '', '&');
         //return json_encode($this->_responseBody);
-        return $this;
+        return $this->get($this->_requestUrl);
     }
     public function addContacts($contacts)
     {
@@ -177,6 +177,16 @@ class Sematime extends HttpClient
         $this->_requestUrl=$this->url.'/contacts/'.$contactId;
         $this->_responseBody=$this->contacts;
         return $this->put($this->_requestUrl,$this->_responseBody);
+    }
+    public function getContact($id = '', $group='')
+    {
+        if($id=='' OR $group==''){
+            throw new SematimeAPIException('Specify A Contactid Or Group You want to get');
+        }
+        $this->_responseBody['groupName'] = $group;
+        $this->_requestUrl = $this->url.'/contacts/'.$id.'?'.http_build_query($this->_responseBody, '', '&');
+        return $this->get($this->_requestUrl);
+        
     }
     
 }
