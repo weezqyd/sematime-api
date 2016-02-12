@@ -121,9 +121,9 @@ members of the company’s sales team.
  ```
 
 
-    #### Retreiving Contacts
+#### Retreiving Contacts
 
-    Getting contacts from a group - Provide the group name for the contacts you want to retreive
+Getting contacts from a group - Provide the group name for the contacts you want to retreive
 
 
 ```php
@@ -135,7 +135,7 @@ members of the company’s sales team.
     $contacts= $sema->getGroupContacts($group); // you will get a json formated string of your contacts
 
 ```
-    Getting an Individual contact from a group - Pass in the contactId as the first parameter folowed by the groupName
+Getting an Individual contact from a group - Pass in the contactId as the first parameter folowed by the groupName
 
 ```php
 
