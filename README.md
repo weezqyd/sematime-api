@@ -1,7 +1,7 @@
 
 # Sematime Api gateway for php 
 
-[![Build Status](https://secure.travis-ci.org/nategood/httpful.png?branch=master)](http://travis-ci.org/nategood/httpful) 
+[![Build Status](https://secure.travis-ci.org/weezqydy/sematimeapi.png?branch=master)](http://travis-ci.org/weezqydy/sematimeapi) 
 [![Latest Stable Version](https://poser.pugx.org/weezqydy/sematimeapi/v/stable)](https://packagist.org/packages/weezqydy/sematimeapi) [![Total Downloads](https://poser.pugx.org/weezqydy/sematimeapi/downloads)](https://packagist.org/packages/weezqydy/sematimeapi) [![Latest Unstable Version](https://poser.pugx.org/weezqydy/sematimeapi/v/unstable)](https://packagist.org/packages/weezqydy/sematimeapi) [![License](https://poser.pugx.org/weezqydy/sematimeapi/license)](https://packagist.org/packages/weezqydy/sematimeapi)
 
 This is a php package that you can easily intergarate into your project to send SMS Messages using the awesome Sematime API, to start using this package require it in your project using composer a php Dependency management tool.
@@ -42,7 +42,8 @@ API_KEY = "your-sematime-api-key"
 USER_ID = "user-id-from-sematime"
 ```
 
-### Sending Messages
+### Messages
+#### Sending Messages
 
 With everything configured properly, we are now ready to send our first message using sematime
 ```php
@@ -100,6 +101,20 @@ will pass them to you when invoking your callback.
          ->addTo(array('1234567890')) // addTo expects an array of recipients
          ->message('an awesome message')
          ->send(); // send the message
+```
+#### Geting Scheduled Messages
+To retreive Scheduled messages  
+```php
+    $sema = new Sematime\Api\Sematime();
+    $scheduled= $sema->getAllScheduled()->get(); // returns the first 20 scheduled messages
+
+    /* retrieve more scheduled messages or retrieve from a certain point.*/
+    $startFrom = 15;
+    $fetch=40;
+    // retrieves 40 messages starting form the 15th
+     $scheduled= $sema->getAllScheduled($fetch, $startFrom)->get();
+     print $scheduled;
+
 ```
 ### Contacts
 Sematime organizes contacts into groups. A group will usually contain the contacts of people

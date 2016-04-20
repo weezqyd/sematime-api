@@ -197,4 +197,14 @@ class Sematime extends HttpClient
     {
         return $this->put($this->_requestUrl,$this->contact);
     }
+    public function accountDetails()
+    {
+        $this->_requestUrl=$this->url.'/accounts';
+        return $this->get($this->_requestUrl);
+    }
+    public function renameGroup($group)
+    {
+        $this->_requestUrl=$this->url.'/groups/rename/'.$group;
+        return $this;
+    }
 }
