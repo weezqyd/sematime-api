@@ -7,9 +7,12 @@
 This is a php package that you can easily intergarate into your project to send SMS Messages using the awesome Sematime API, to start using this package require it in your project using composer a php Dependency management tool.
 if you dont have composer installed head over to [Composer](http://getcomposer.org/download) and install
 
+### Note
+Do not use this package in production until a stable version is released. there are still bugs that need to be fixed, if you encounter one feel free to raise an issue.
+
 To include this package in your project add this to your composer.json and then run composer update
 ```
-	{
+    {
         "require": {
             "weezqydy/sematimeapi": "dev-master"
         }
@@ -90,10 +93,10 @@ will pass them to you when invoking your callback.
 ```php
   // all these methods are chainable
     $sema->signature('Sent by The Sematime team. Call 0706129100')
-         ->senderId('Sematime')
-         ->scheduledTime('1426683660000')
-         ->callbackUrl('https://api.mydomain.com/callback')
-         ->extra('extra=extra data')
+         ->senderId('Sematime') // Use this option only if you have an existing  ID
+         ->scheduledTime('1466683660000') // Must be a future timestamp
+         ->callbackUrl('https://api.mydomain.com/callback') // must be an existing and Valid URL
+         ->extra('extra=extra data') // Only accepts strings 
          ->addTo(array('1234567890')) // addTo expects an array of recipients
          ->message('an awesome message')
          ->send(); // send the message
@@ -109,45 +112,53 @@ members of the company’s sales team.
         use Sematime\Api\Sematime;      
         // Initialize The Sematime Api
         $sema = new Sematime();
-        $response=$sema->addGroup('members') // the group name you wish to add contacts
+        $response=$sema->groupName('My Group') // the group name you wish to add contacts
                        ->addId('1') // contact id for the contact you want to add
                        ->addName('John Doe') // a name for your contact 
                        ->addPhone('1234567890') // phone number you wish to add
                        ->save(); // finally save your contact
-          print  $response; // {"statusCode":200, "description":"Contacts added successfully.", "totalContacts":1, "contactsAdded":1}
+          print  $response; // {"statusCode":200, "description":"Contacts added successfully.","totalContacts":1, "contactsAdded":1}
  ```
- if you want to create multiple contacts at once, prepare  an array and add them
- ```php
-    $contacts = [
-        [
-            'contactId'=> '1',
-            'phoneNumber'=>'1234567890',
-            'name' => 'John Doe',
-        ],
-         [
-            'contactId'=> '2',
-            'phoneNumber'=>'020345678',
-            'name' => 'Arnold Weaver',
-        ],
-         [
-            'contactId'=> '3',
-            'phoneNumber'=>'3246789009',
-            'name' => 'Mary Cook',
-        ],
-         [
-            'contactId'=> '4',
-            'phoneNumber'=>'0345789032',
-            'name' => 'Garry DAvis',
-        ],
 
-    ];
-    $group= 'My List';
-        $sema = new Sematime();
-        $list = $sema->addGroup($group)->addContacts($contacts)->save() // sure enough all your contacts will be saved
-        echo $list;
+
+#### Retreiving Contacts
+
+- Getting contacts from a group - Provide the group name for the contacts you want to retreive
+
+
+```php
+
+    use Sematime/Api/Sematime;
+
+    $sema= new Sematime();
+    $group = 'My Group'; // The group you want to get contacts;
+    $contacts= $sema->getGroupContacts($group); // you will get a json formated string of your contacts
+
 ```
+- Getting an Individual contact from a group - Pass in the contactId as the first parameter followed by the groupName
 
+```php
+
+    use Sematime/Api/Sematime;
+
+    $sema= new Sematime();
+    $group = 'My Group'; // The group you want to get contacts;
+    $contactId= '14578652';
+    $contacts= $sema->getContacts($contactId, $group); // you will get a json formated string of the contact
+
+```
 #### Editing Contacts
+To edit your contact all you need to do is provide your new name or new phone number for that contact
 
+````php
+    use Sematime/Api/Sematime;
 
+    $sema= new Sematime();
+    $edit= $sema->editContact('145367')// provide the contact id to edit
+                ->groupName('My Group') // The group in which the contact exists
+                ->newName('David Clerk')// New name for contact
+                ->newPhoneNumber('1234567890') // New phone Number to the contact
+                ->edit(); // Save your changes 
 
+```
+#### Deleting Contacts
