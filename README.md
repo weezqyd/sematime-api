@@ -143,11 +143,9 @@ members of the company’s sales team.
 
 ```php
 
-<<<<<<< HEAD
-    use Semamatime/Api/Sematime;
-=======
     use Sematime/Api/Sematime;
->>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
+
+    use Sematime/Api/Sematime;
 
     $sema= new Sematime();
     $group = 'My Group'; // The group you want to get contacts;
@@ -157,12 +155,8 @@ members of the company’s sales team.
 - Getting an Individual contact from a group - Pass in the contactId as the first parameter followed by the groupName
 
 ```php
-
-<<<<<<< HEAD
-    use Semamatime/Api/Sematime;
-=======
     use Sematime/Api/Sematime;
->>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
+    use Sematime/Api/Sematime;
 
     $sema= new Sematime();
     $group = 'My Group'; // The group you want to get contacts;
@@ -174,7 +168,6 @@ members of the company’s sales team.
 To edit your contact all you need to do is provide your new name or new phone number for that contact
 
 ````php
-<<<<<<< HEAD
     use Semamatime/Api/Sematime;
 
     $sema= new Sematime();
@@ -184,10 +177,8 @@ To edit your contact all you need to do is provide your new name or new phone nu
                 ->newPhoneNumber('1234567890') // New phone Number to the contact
                 ->edit(); // Save your changes 
 
-```
-=======
+```php
     use Sematime/Api/Sematime;
->>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
 
     $sema= new Sematime();
     $edit= $sema->editContact('145367')// provide the contact id to edit
