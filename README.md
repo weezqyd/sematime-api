@@ -1,7 +1,7 @@
 
 # Sematime Api gateway for php 
 
-[![Build Status](https://secure.travis-ci.org/weezqydy/sematimeapi.png?branch=master)](http://travis-ci.org/weezqydy/sematimeapi) 
+[![Build Status](https://travis-ci.org/weezqyd/sematime-api.svg?branch=master)](http://travis-ci.org/weezqydy/sematimeapi) 
 [![Latest Stable Version](https://poser.pugx.org/weezqydy/sematimeapi/v/stable)](https://packagist.org/packages/weezqydy/sematimeapi) [![Total Downloads](https://poser.pugx.org/weezqydy/sematimeapi/downloads)](https://packagist.org/packages/weezqydy/sematimeapi) [![Latest Unstable Version](https://poser.pugx.org/weezqydy/sematimeapi/v/unstable)](https://packagist.org/packages/weezqydy/sematimeapi) [![License](https://poser.pugx.org/weezqydy/sematimeapi/license)](https://packagist.org/packages/weezqydy/sematimeapi)
 
 This is a php package that you can easily intergarate into your project to send SMS Messages using the awesome Sematime API, to start using this package require it in your project using composer a php Dependency management tool.
