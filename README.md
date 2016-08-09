@@ -12,7 +12,7 @@ Do not use this package in production until a stable version is released. there 
 
 To include this package in your project add this to your composer.json and then run composer update
 ```
-	{
+    {
         "require": {
             "weezqydy/sematimeapi": "dev-master"
         }
@@ -143,7 +143,11 @@ members of the company’s sales team.
 
 ```php
 
+<<<<<<< HEAD
     use Semamatime/Api/Sematime;
+=======
+    use Sematime/Api/Sematime;
+>>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
 
     $sema= new Sematime();
     $group = 'My Group'; // The group you want to get contacts;
@@ -154,7 +158,11 @@ members of the company’s sales team.
 
 ```php
 
+<<<<<<< HEAD
     use Semamatime/Api/Sematime;
+=======
+    use Sematime/Api/Sematime;
+>>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
 
     $sema= new Sematime();
     $group = 'My Group'; // The group you want to get contacts;
@@ -166,6 +174,7 @@ members of the company’s sales team.
 To edit your contact all you need to do is provide your new name or new phone number for that contact
 
 ````php
+<<<<<<< HEAD
     use Semamatime/Api/Sematime;
 
     $sema= new Sematime();
@@ -176,5 +185,16 @@ To edit your contact all you need to do is provide your new name or new phone nu
                 ->edit(); // Save your changes 
 
 ```
+=======
+    use Sematime/Api/Sematime;
+>>>>>>> 843c32953a44ff49de00fe2a31cbd2033358ea43
 
+    $sema= new Sematime();
+    $edit= $sema->editContact('145367')// provide the contact id to edit
+                ->groupName('My Group') // The group in which the contact exists
+                ->newName('David Clerk')// New name for contact
+                ->newPhoneNumber('1234567890') // New phone Number to the contact
+                ->edit(); // Save your changes 
 
+```
+#### Deleting Contacts
