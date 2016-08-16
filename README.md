@@ -14,7 +14,7 @@ To include this package in your project add this to your composer.json and then 
 ```
     {
         "require": {
-            "weezqydy/sematimeapi": "dev-master"
+            "weezqydy/sematimeapi": "^1.0"
         }
     }
 ```
@@ -169,16 +169,6 @@ To edit your contact all you need to do is provide your new name or new phone nu
 
 ````php
     use Semamatime/Api/Sematime;
-
-    $sema= new Sematime();
-    $edit= $sema->editContact('145367')// provide the contact id to edit
-                ->groupName('My Group') // The group in which the contact exists
-                ->newName('David Clerk')// New name for contact
-                ->newPhoneNumber('1234567890') // New phone Number to the contact
-                ->edit(); // Save your changes 
-
-```php
-    use Sematime/Api/Sematime;
 
     $sema= new Sematime();
     $edit= $sema->editContact('145367')// provide the contact id to edit

@@ -9,26 +9,26 @@ use Sematime\Api\HttpClient;
 class Sematime extends HttpClient
 {
 	
-	public $_apiKey ;
-    public $_userid ;
+	protected $_apiKey ;
+    protected $_userid ;
     public $_requestBody;
-    public $_requestUrl;
+    protected $_requestUrl;
     public $_responseBody = array();
     public $_responseInfo;
-    public $_to = array();
-    public $_from;
-    public $contact = array();
-    public $contacts = array();
-    public $SMS_URL = "https://api.sematime.com/v1/{userId}/messages";
-    public $URL = "https://api.sematime.com/v1/{userId}";
+    protected $_to = array();
+    protected $_from;
+    protected $contact = array();
+    protected $contacts = array();
+    protected $SMS_URL = "https://api.sematime.com/v1/{userId}/messages";
+    protected $URL = "https://api.sematime.com/v1/{userId}";
 
-    public $OK = 200;
-    public $CREATED = 201;
-    public $UNAUTHORIZED =401;
-    public $FORBIDDEN =403;
-    public $BAD_REQUEST =400;
-    public $NOT_FOUND =404;
-    public $SERVER_ERROR =500;
+    protected $OK = 200;
+    protected $CREATED = 201;
+    protected $UNAUTHORIZED =401;
+    protected $FORBIDDEN =403;
+    protected $BAD_REQUEST =400;
+    protected $NOT_FOUND =404;
+    protected $SERVER_ERROR =500;
 
 
     const Debug = false;
