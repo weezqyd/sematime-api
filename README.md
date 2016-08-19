@@ -26,7 +26,7 @@ you can store, edit or delete contacts on behalf of your users.
 Before you get started with the API, we will need you to do the following:
 ### Creating a free Sematime account
 A Sematime account is needed before you can start using our API. If you do not have a
-Sematime account already, go to [Sematime](https://myaccount.sematime.com/regiser) and get
+Sematime account already, go to [Sematime](http://sematime.elasticbeanstalk.com/register) and get
 yourself an account.
 
 #### Getting your API credentials
