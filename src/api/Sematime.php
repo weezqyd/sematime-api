@@ -9,12 +9,7 @@ use Sematime\Api\HttpClient;
 class Sematime extends HttpClient
 {
 	
-	protected $_apiKey ;
-    protected $_userid ;
-    public $_requestBody;
-    protected $_requestUrl;
-    public $_responseBody = array();
-    public $_responseInfo;
+
     protected $_to = array();
     protected $_from;
     protected $contact = array();

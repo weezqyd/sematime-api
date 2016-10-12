@@ -69,7 +69,7 @@ with the salutation followed by their name. For example: Dear Admin, Dear
 Lucy, Dear Jean etc in which case the salutation is the word ‘Dear
 ```php
      //you can chain the parameters in any order
-    $sema->message('message to send')->addTo('1234567890')->salutation('Dear')->send();
+    $sema->message('message to send')->addTo(['1234567890'])->salutation('Dear')->send();
 ```
 - signature() - an optional parameter whose value is a unique message that is
 attached at the end of all the messages that you send. For example, Sent by The

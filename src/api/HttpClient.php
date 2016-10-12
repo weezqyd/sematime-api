@@ -10,14 +10,20 @@ use Dotenv\Dotenv;
 
 Class HttpClient implements HttpClientInterface
 {
-	public $init;
+	protected $init;
+	protected $_apiKey ;
+    protected $_userid ;
+    protected $_requestBody;
+    protected $_requestUrl;
+    protected $_responseBody = array();
+    protected $_responseInfo;
 
 	function __construct()
 	{
 		$this->boot();
 		$this->init();
     }
-    public function boot()
+    private function boot()
     {
       	$base = realpath(__DIR__.'/../../'); 
       	$vendor = realpath(__DIR__.'/../../../../../');
