@@ -49,18 +49,18 @@ class Sematime extends HttpClient
             $this->_responseBody['senderId'] = $from;
             return $this;
         }
-    public function addId($cid='',$id = 0 )
+    public function addId($cid='')
         { 
            $this->contacts[$id]['contactId'] = $cid;
            return $this; 
         }
-    public function addName($name='',$id = 0 )
+    public function addName($name='')
         { 
         if($name==''){print SematimeAPIException::contactRequired();exit;}
            $this->contacts[$id]['name'] = $name;
            return $this; 
         }
-    public function addPhone($phone='',$id = 0 )
+    public function addPhone($phone='')
         {
         if($phone==''){print SematimeAPIException::contactRequired();exit;}
            $this->contacts[$id]['phoneNumber'] = $phone; 
@@ -98,7 +98,8 @@ class Sematime extends HttpClient
         }
     public function callbackUrl($url)
         {
-            if(filter_var($url, FILTER_VALIDATE_URL)==false){ print SematimeAPIException::invalidUrl(); exit;}
+            if(filter_var($url, FILTER_VALIDATE_URL)==false)
+                throw new SematimeAPIException('please provide a valid URL');
             $this->_responseBody['callbackUrl'] = $url;
             return $this;
         }
@@ -147,20 +148,23 @@ class Sematime extends HttpClient
         //return json_encode($this->_responseBody);
         return $this->get($this->_requestUrl);
     }
-    public function addContacts($contacts)
+    public function editContact($id, $group, $name = null, $phone = null)
     {
-      if(array_key_exists('name', $contacts) AND array_key_exists('contactId', $contacts) AND array_key_exists('phoneNumber', $contacts)){
-      }
-      else{
-        throw new SematimeAPIException("Your contacts dont seem to be prepared correctly");
-      }
-        return $this;
-
+        $this->contact['groupName'] = $group;
+        if($name !== NULL)
+            $this->contact['newName'] = $name;
+        if($phone !== NULL)
+            $this->contact['newPhoneNumber'] = $phone;
+        $this->_requestUrl=$this->url.'/contacts/edit/'.$id;
+        //return json_encode($this->contact);
+        return $this->exec($this->_requestUrl,$this->contact);
     }
-    public function editContact($id)
+
+    public function deleteContact($id, $group)
     {
-        $this->_requestUrl=$this->url.'/contacts/'.$id;
-        return $this;
+        $this->contact['groupName'] = $group;
+        $this->_requestUrl=$this->url.'/contacts/delete/'.$id;
+        return $this->exec($this->_requestUrl,$this->contact);
     }
     public function getContact($id = '', $group='')
     {
@@ -188,18 +192,20 @@ class Sematime extends HttpClient
         $this->contact['newPhoneNumber'] = $phone;
         return $this;
     }
-    public function edit()
-    {
-        return $this->put($this->_requestUrl,$this->contact);
-    }
+
     public function accountDetails()
     {
         $this->_requestUrl=$this->url.'/accounts';
         return $this->get($this->_requestUrl);
     }
-    public function renameGroup($group)
-    {
-        $this->_requestUrl=$this->url.'/groups/rename/'.$group;
-        return $this;
-    }
+    // public function renameGroup($group, $new_name)
+    // {
+
+    //     $this->_requestUrl=$this->url.'/groups/rename/'.$group;
+    //     return $this->exec($this->_requestUrl, ['newName' => $new_name]);
+    // }
+    // public function groups()
+    // {
+    //    return $this->get($this->url.'/contacts/groups');
+    // }
 }

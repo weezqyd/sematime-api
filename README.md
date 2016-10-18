@@ -142,9 +142,6 @@ members of the company’s sales team.
 
 
 ```php
-
-    use Sematime/Api/Sematime;
-
     use Sematime/Api/Sematime;
 
     $sema= new Sematime();
@@ -155,7 +152,6 @@ members of the company’s sales team.
 - Getting an Individual contact from a group - Pass in the contactId as the first parameter followed by the groupName
 
 ```php
-    use Sematime/Api/Sematime;
     use Sematime/Api/Sematime;
 
     $sema= new Sematime();
@@ -171,11 +167,38 @@ To edit your contact all you need to do is provide your new name or new phone nu
     use Semamatime/Api/Sematime;
 
     $sema= new Sematime();
-    $edit= $sema->editContact('145367')// provide the contact id to edit
-                ->groupName('My Group') // The group in which the contact exists
-                ->newName('David Clerk')// New name for contact
-                ->newPhoneNumber('1234567890') // New phone Number to the contact
-                ->edit(); // Save your changes 
+
+    $contactId = '145367'; // provide the contact id to edit this required
+    $groupName = 'My Group'; // The group in which the contact exists this is required
+    $newName = 'David Clerk'; // New name for contact optional
+    $newPhoneNumber = '1234567890';  // New phone Number to the contact, optional
+
+    $response= $sema->editContact($constactId, $group, $newName, $newPhoneNumber);
+     echo $response; // Contact updated successfully.
+            
 
 ```
 #### Deleting Contacts
+Deleting a contact only requires you to provide the group and ID of the contact you wish to delete
+
+```php
+ use Semamatime/Api/Sematime;
+
+    $sema= new Sematime();
+
+    $contactId = '145367'; // provide the contact id to edit this required
+    $groupName = 'My Group'; // The group in which the contact exists this is required
+
+    $response = $sema->deleteContact($contactId, $group);
+    echo $response; // Contact Deleted successfully
+```
+#### Account details
+To retrieve your account details 
+```php 
+use Semamatime/Api/Sematime;
+
+    $sema= new Sematime();
+
+    $response = $sema->accountDetails();
+
+    echo $response //{"account":{"accountId":"xxxxxxxxxxxxx", "name":"Your Name", "phoneNumber":"123456789", "smsBalance":0, "accountType":"school", "senderId":"Sematime", "paymentPlan":"prepaid", "createdOn":"Wed, 09\/09\/2015 04:59 PM"}, "statusCode":200, "description":"Account profile retrieved successfully."}
