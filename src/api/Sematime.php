@@ -49,18 +49,18 @@ class Sematime extends HttpClient
             $this->_responseBody['senderId'] = $from;
             return $this;
         }
-    public function addId($cid='')
+    public function addId($cid='',$id=0)
         { 
            $this->contacts[$id]['contactId'] = $cid;
            return $this; 
         }
-    public function addName($name='')
+    public function addName($name='',$id = 0)
         { 
         if($name==''){print SematimeAPIException::contactRequired();exit;}
            $this->contacts[$id]['name'] = $name;
            return $this; 
         }
-    public function addPhone($phone='')
+    public function addPhone($phone='', $id = 0)
         {
         if($phone==''){print SematimeAPIException::contactRequired();exit;}
            $this->contacts[$id]['phoneNumber'] = $phone; 
