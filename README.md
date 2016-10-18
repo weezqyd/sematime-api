@@ -7,9 +7,6 @@
 This is a php package that you can easily intergarate into your project to send SMS Messages using the awesome Sematime API, to start using this package require it in your project using composer a php Dependency management tool.
 if you dont have composer installed head over to [Composer](http://getcomposer.org/download) and install
 
-### Note
-Do not use this package in production until a stable version is released. there are still bugs that need to be fixed, if you encounter one feel free to raise an issue.
-
 To include this package in your project add this to your composer.json and then run composer update
 ```
     {
