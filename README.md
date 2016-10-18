@@ -106,13 +106,13 @@ will pass them to you when invoking your callback.
 To retreive Scheduled messages  
 ```php
     $sema = new Sematime\Api\Sematime();
-    $scheduled= $sema->getAllScheduled()->get(); // returns the first 20 scheduled messages
+    $scheduled= $sema->getAllScheduled(); // returns the first 20 scheduled messages
 
     /* retrieve more scheduled messages or retrieve from a certain point.*/
     $startFrom = 15;
     $fetch=40;
     // retrieves 40 messages starting form the 15th
-     $scheduled= $sema->getAllScheduled($fetch, $startFrom)->get();
+     $scheduled= $sema->getAllScheduled($fetch, $startFrom);
      print $scheduled;
 
 ```

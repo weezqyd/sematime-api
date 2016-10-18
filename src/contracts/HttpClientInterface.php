@@ -2,9 +2,7 @@
 namespace Sematime\Contracts;
 
 Interface HttpClientInterface 
-{
-	public function boot();
-	
+{	
 	public function init();
 
 	public function jsonEncode($data);
