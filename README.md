@@ -11,7 +11,7 @@ To include this package in your project add this to your composer.json and then 
 ```
     {
         "require": {
-            "weezqydy/sematimeapi": "dev-master"
+            "weezqydy/sematimeapi": "~1.0"
         }
     }
 ```
